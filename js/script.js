@@ -1,5 +1,7 @@
 window.addEventListener('DOMContentLoaded', () => {
 
+    //Tabs
+
     const tabs = document.querySelectorAll('.tabheader__item'),
         tabsContent = document.querySelectorAll('.tabcontent'),
         tabsParent = document.querySelector('.tabheader__items');
@@ -36,6 +38,8 @@ window.addEventListener('DOMContentLoaded', () => {
             });
         } 
     });
+
+    //Timer
 
     const deadline = '2021-09-30';
 
@@ -88,4 +92,36 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     setClock('.timer', deadline);
+
+    //Modal
+
+    const btnsModal = document.querySelectorAll('[data-modal'),
+        btnClose = document.querySelector('[data-close]'),
+        modal = document.querySelector('.modal');
+
+    function closeModal() {
+        modal.classList.toggle('show');
+        document.body.style.overflow = '';
+    }
+
+    btnsModal.forEach(item => {
+        item.addEventListener('click', () => {
+            modal.classList.toggle('show');
+            document.body.style.overflow = 'hidden';  
+        });
+    });
+
+    btnClose.addEventListener('click', closeModal);
+
+    modal.addEventListener('click', (event) => {
+        if (event.target === modal) {
+            closeModal();
+        }
+    });
+
+    document.addEventListener('keydown', (event) => {
+        if (event.code === 'Escape' && modal.classList.contains('show')) {
+            closeModal();
+        }
+    });
 });
